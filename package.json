@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "code.js",
-  "dependencies": {},
+  "dependencies": {
+    "babel-preset-env": "^1.7.0"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
     "jest": "^24.9.0"
   },
   "scripts": {
