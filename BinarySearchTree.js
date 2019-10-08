@@ -1,4 +1,3 @@
-
 export default class BinarySearchTree {
 
     constructor() {
@@ -47,16 +46,20 @@ export default class BinarySearchTree {
         }
     }
 
-        lowestCommonAncestor (root, a, b) {
-            return 4;
-            if (root.data > a.data && root.data > b.data) {
-                return lowestCommonAncestor(root.left, p, q);
+
+    // lowestCommonAncestor(x, i, j) {
+    //     return x;    
+	// }
+
+        lowestCommonAncestor (val, a, b) {
+            if (val.data > a.data && val.data > b.data) {
+                return lowestCommonAncestor(val.left, p, q);
             }
-            else if (root.data < a.data && root.data < b.data) {
-                return lowestCommonAncestor(root.right, a, b);
+            else if (val.data < a.data && val.data < b.data) {
+                return lowestCommonAncestor(val.right, a, b);
             }
             else {
-                return root.root.data;
+                return val;
             }
         }
 

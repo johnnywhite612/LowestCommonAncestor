@@ -1,5 +1,4 @@
 import BinarySearchTree from './BinarySearchTree';
-import Meetup from './Meetup';
 
 it('First Test', () => {
   let BST = new BinarySearchTree();
@@ -12,10 +11,21 @@ it('First Test', () => {
   BST.insertNumberNode(18);
   BST.insertNumberNode(15);
   BST.insertNumberNode(6);
-  
-  let lca = BST.lowestCommonAncestor(BST, 8, 15);
-  expect(lca).toBe(4);
 
+  /*
+  BST Looks like the following
+              7
+            /   \
+          5     14
+        / \     /  \
+           6   13    18
+              / \   / \ 
+             8     15
+  */
+  
+  let lca = BST.lowestCommonAncestor(BST.root, 8, 15);
+  console.log(lca.data);
+  expect(lca.data).toBe(4);
 });
 
   
