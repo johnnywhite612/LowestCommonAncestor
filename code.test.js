@@ -13,6 +13,8 @@ it('Simple working tests', () => {
   BST.insertNumberNode(6);
   BST.insertNumberNode(29);
   BST.insertNumberNode(42);
+  //Insert in again, our system won't add it to the BST
+  BST.insertNumberNode(42);
 
   /*
   BST Looks like the following
@@ -25,6 +27,7 @@ it('Simple working tests', () => {
              8     15   29
                           \
                            42
+
   */
   
   let lca = BST.findLCA(BST.root, 13, 18);
@@ -35,6 +38,8 @@ it('Simple working tests', () => {
   expect(lca3.data).toBe(18);
   let lca4 = BST.findLCA(BST.root, 42, 6);
   expect(lca4.data).toBe(7);
+  let lca5 = BST.findLCA(BST.root, 6, 5);
+  expect(lca5.data).toBe(5);
 });
 
 
@@ -98,7 +103,8 @@ it('Test for identical values searched', () => {
 
 });
 
-it('Test for identical values searched', () => {
+
+it('Test for unexpected input', () => {
   let BST = new BinarySearchTree();
 
   BST.insertNumberNode(7);
@@ -125,7 +131,30 @@ it('Test for identical values searched', () => {
                            42
   */
   
-  let lca = BST.findLCA(BST.root, 13, 13);
+//Test null node input
+//Test exceeding min val
+
+ let exceedMaxVal = Number.MAX_VALUE * 2;
+ let exceedMinVal = Number.MIN_VALUE / -100;
+
+//Test with input exceeding max val
+  let lca = BST.findLCA(BST.root, exceedMaxVal, 29);
   expect(lca).toBe(null);
+
+  //Test with input exceeding min val
+  let lca2 = BST.findLCA(BST.root, 15, exceedMinVal);
+  expect(lca2).toBe(null);
+
+  //Test with null root node
+  let lca3 = BST.findLCA(null, 13, 6);
+  expect(lca3).toBe(null);
+
+  //Test for identical values searched
+  let lca4 = BST.findLCA(BST.root, 13, 13);
+  expect(lca4).toBe(null);
+
+  //Test isValidValue function for output if supplied with a null node
+  let lca5 = BST.isValidValue(null, 3);
+  expect(lca5).toEqual(false);
 
 });
