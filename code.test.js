@@ -12,7 +12,7 @@ it('Simple working tests', () => {
   BST.insertNumberNode(15);
   BST.insertNumberNode(6);
   BST.insertNumberNode(29);
-
+  BST.insertNumberNode(42);
 
   /*
   BST Looks like the following
@@ -23,6 +23,8 @@ it('Simple working tests', () => {
            6   13    18
               / \   /  \ 
              8     15   29
+                          \
+                           42
   */
   
   let lca = BST.findLCA(BST.root, 13, 18);
@@ -31,6 +33,8 @@ it('Simple working tests', () => {
   expect(lca2.data).toBe(7);
   let lca3 = BST.findLCA(BST.root, 29, 15);
   expect(lca3.data).toBe(18);
+  let lca4 = BST.findLCA(BST.root, 42, 6);
+  expect(lca4.data).toBe(7);
 });
 
 
@@ -58,10 +62,13 @@ it('Test for keys that don\'t exist', () => {
   expect(lca2).toBe(null);
   let lca3 = BST.findLCA(BST.root, -323, 2113);
   expect(lca3).toBe(null);
+  //Here we'll test a value that exists in our BST and one that doesn't
+  let lca4 = BST.findLCA(BST.root, -23, 28);
+  expect(lca4).toBe(null);
 });
 
   
-it('Test 2 identical keys', () => {
+it('Test for identical values searched', () => {
   let BST = new BinarySearchTree();
 
   BST.insertNumberNode(7);
@@ -87,6 +94,38 @@ it('Test 2 identical keys', () => {
   */
   
   let lca = BST.findLCA(BST.root, 13, 13);
-  expect(lca.data).toBe(14);
+  expect(lca).toBe(null);
+
+});
+
+it('Test for identical values searched', () => {
+  let BST = new BinarySearchTree();
+
+  BST.insertNumberNode(7);
+  BST.insertNumberNode(14);
+  BST.insertNumberNode(5);
+  BST.insertNumberNode(13); 
+  BST.insertNumberNode(8);
+  BST.insertNumberNode(18);
+  BST.insertNumberNode(15);
+  BST.insertNumberNode(6);
+  BST.insertNumberNode(29);
+  BST.insertNumberNode(42);
+
+  /*
+  BST Looks like the following
+              7
+            /   \
+          5     14
+        / \     /  \
+           6   13    18
+              / \   /  \ 
+             8     15   29
+                          \
+                           42
+  */
+  
+  let lca = BST.findLCA(BST.root, 13, 13);
+  expect(lca).toBe(null);
 
 });

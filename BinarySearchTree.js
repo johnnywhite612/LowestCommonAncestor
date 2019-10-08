@@ -2,6 +2,7 @@ export default class BinarySearchTree {
 
     constructor() {
         this.root = null;
+        this.tempParent = null;
     }
     
     get checkMe(){
@@ -83,6 +84,9 @@ export default class BinarySearchTree {
 
     findLCA(node, n1, n2){
         if(!this.isValidValue(node, n1) || !this.isValidValue(node, n2)){
+            return null;
+        }
+        if(n1===n2){
             return null;
         }
         return this.lowestCommonAncestor(node, n1, n2);
