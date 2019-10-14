@@ -1,4 +1,4 @@
-import BinarySearchTree from './BinarySearchTree';
+import BinarySearchTree from './BST';
 
 it('Simple working tests', () => {
   let BST = new BinarySearchTree();
