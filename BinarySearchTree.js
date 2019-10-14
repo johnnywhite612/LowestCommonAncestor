@@ -21,7 +21,6 @@ export default class BinarySearchTree {
                 if (data < currentNode.data) {
                     if (!currentNode.left) {
                         currentNode.left = Node;
-
                         break;
                     } else {
                         currentNode = currentNode.left;
