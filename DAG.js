@@ -1,4 +1,5 @@
 export default class DAG {
+
         constructor(noOfVertices) {
                 this.noOfVertices = noOfVertices;
                 this.AdjList = new Map();
@@ -6,8 +7,7 @@ export default class DAG {
 
         // add vertex to the graph 
         addVertex(v) {
-                // initialize the adjacent list with a 
-                // null array 
+                // initialize the adjacent list
                 this.AdjList.set(v, []);
         }
 
@@ -39,7 +39,45 @@ export default class DAG {
                 }
         }
 
-        findLCA(val1, val2){
+
+        // The main DFS method 
+        dfs(startingNode, m1, m2) {
+                var visited = [];
+                for (var i = 0; i < this.noOfVertices; i++)
+                        visited[i] = false;
+
+                this.DFSUtil(startingNode, visited, startingNode, m1, m2);
+        }
+
+        // Recursive method which processes all the adj vertex
+        // of the vert with which it was called
+        DFSUtil(vert, visited, og, m1, m2) {
+                //vert is the parent
+                visited[vert] = true;
+                console.log(vert);
+
+                var get_neighbours = this.AdjList.get(vert);
+
+                for (var i in get_neighbours) {
+                        var get_elem = get_neighbours[i];
+                        if(get_elem === m1){
+                                console.log("MATCH: "+get_elem+" = "+m1);
+                        }
+                        if(get_elem === m2){
+                                console.log("MATCH: "+get_elem+" = "+m2);
+                        }
+                        if (!visited[get_elem])
+                                this.DFSUtil(get_elem, visited, og, m1, m2);
+                }
+        }
+
+        findLCA(val1, val2) {
+                this.val1 = val1;
+                this.val2 = val2;
+                for (var i = 0; i < this.noOfVertices; i++){
+                        this.dfs(this.AdjList.get(i), val1, val2);
+                }
                 return 0;
         }
+
 }

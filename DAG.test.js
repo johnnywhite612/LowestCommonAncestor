@@ -35,7 +35,7 @@ it('Some initial tests to ensure it works!', () => {
         //               |    /
         //               ↓   |
         //               F <-
-
+        
         let lca = DAG.findLCA('E','B');
         expect(lca).toBe('A');
 });
