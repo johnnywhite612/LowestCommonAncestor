@@ -1,3 +1,5 @@
+// ****** PLEASE NOTE: This version is incomplete, the completed version is on my master branch. 
+// ****** Only pay attention to the DAG.js and DAG.test.js files on this branch
 
 export default class BinarySearchTree {
 

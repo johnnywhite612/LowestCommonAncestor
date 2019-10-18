@@ -1,40 +1,48 @@
 export default class DAG {
 
+        // Here we setup our datastructure
         constructor(noOfVertices) {
-                this.noOfVertices = noOfVertices;
-                this.AdjList = new Map();
+                this.noOfVertices = noOfVertices;       //set the number of nodes
+                this.adjList = new Map();       //Create a Map DS to store data
         }
 
-        // add vertex to the graph 
-        addVertex(v) {
-                // initialize the adjacent list
-                this.AdjList.set(v, []);
+        //Checks number of nodes/verts in DS
+        getVertCount(){
+                return this.adjList.size;
+        }
+        
+
+        // Used primarily for testing - finds the adjacent nodes that the node v points to
+        getAdjVertex(v){
+                return this.adjList.get(v);
         }
 
-        // add edge to the graph 
-        addEdge(v, w) {
-                // get the list for vertex v and put the 
-                // vertex w denoting edge between v and w 
-                this.AdjList.get(v).push(w);
+        // Adds a vertex/node to the graph 
+        addVert(v) {
+                // initializes the adjacent list
+                this.adjList.set(v, []);
+        }
+
+        // Adds an edge to the graph 
+        addEdge(i, j) {
+                // Gets the list for vertex i and puts the vertex j - signifying an edge between i and j
+                this.adjList.get(i).push(j);
         }
 
         printGraph() {
-                // get all the vertices 
-                var get_keys = this.AdjList.keys();
+                // Gets all the vertices 
+                var get_keys = this.adjList.keys();
 
-                // iterate over the vertices 
+                // Iterates over the vertices 
                 for (var i of get_keys) {
-                        // great the corresponding adjacency list 
-                        // for the vertex 
-                        var get_values = this.AdjList.get(i);
+                        var get_values = this.adjList.get(i);
                         var conc = "";
 
-                        // iterate over the adjacency list 
-                        // concatenate the values into a string 
+                        // Iterates over the adjacency list & stores all the values into a string 
                         for (var j of get_values)
                                 conc += j + " ";
 
-                        // print the vertex and its adjacency list 
+                        // Print the vertex and its adjacency list to the system console
                         console.log(i + " -> " + conc);
                 }
         }
@@ -46,20 +54,19 @@ export default class DAG {
                 for (var i = 0; i < this.noOfVertices; i++)
                         visited[i] = false;
 
-                this.DFSUtil(startingNode, visited, startingNode, m1, m2);
+                this.DFSMethod(startingNode, visited, startingNode, m1, m2);
         }
 
-        // Recursive method which processes all the adj vertex
-        // of the vert with which it was called
-        DFSUtil(vert, visited, og, m1, m2) {
-                //vert is the parent
+        // Recursive method which processes all the adj vertex of the vert with which it was called
+        DFSMethod(vert, visited, og, m1, m2) {
+                // The vert is the parent
                 visited[vert] = true;
                 console.log(vert);
 
-                var get_neighbours = this.AdjList.get(vert);
+                var get_neighbour_elems = this.adjList.get(vert);
 
-                for (var i in get_neighbours) {
-                        var get_elem = get_neighbours[i];
+                for (var i in get_neighbour_elems) {
+                        var get_elem = get_neighbour_elems[i];
                         if(get_elem === m1){
                                 console.log("MATCH: "+get_elem+" = "+m1);
                         }
@@ -67,17 +74,23 @@ export default class DAG {
                                 console.log("MATCH: "+get_elem+" = "+m2);
                         }
                         if (!visited[get_elem])
-                                this.DFSUtil(get_elem, visited, og, m1, m2);
+                                this.DFSMethod(get_elem, visited, og, m1, m2);
                 }
         }
 
         findLCA(val1, val2) {
                 this.val1 = val1;
                 this.val2 = val2;
+                let lcaResult = 0;
+                let minDist = 0;
+                // Cycles through each node and checks, if is parent of both, which has shortest distance
+                // Result is the LCA of the Directed Acyclic Graph
                 for (var i = 0; i < this.noOfVertices; i++){
-                        this.dfs(this.AdjList.get(i), val1, val2);
+                        if(lcaResult < minDist){
+                                lcaResult = this.dfs(this.adjList.get(i), val1, val2);
+                        }                        
                 }
-                return 0;
+                return lcaResult;
         }
 
 }
