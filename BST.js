@@ -102,11 +102,10 @@ export default class BinarySearchTree {
             return this.lowestCommonAncestor(node, n1, n2);
     }
 
-    
+
     // The method for finding the LCA in the BST - called recursively
     lowestCommonAncestor(node, n1, n2) {
         if (!node) return;
-
         var val = node.data;
         if (n1 < val && n2 < val) {
             return this.lowestCommonAncestor(node.left, n1, n2);
